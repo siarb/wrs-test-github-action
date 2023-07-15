@@ -1,4 +1,4 @@
-name: Build docs using Docker
+name: Test docs publishing
 description: 'Description of your action'
 branding:
   icon: book-open
@@ -6,7 +6,7 @@ branding:
 
 inputs:
   image-version:
-    description: 'Writerside-builder image'
+    description: 'Writerside docker image version'
     required: true
   instance:
     description: "Instance to build"
