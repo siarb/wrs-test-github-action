@@ -1,0 +1,20 @@
+name: Build docs using Docker
+description: 'Description of your action'
+branding:
+  icon: book-open
+  color: purple
+
+inputs:
+  image-version:
+    description: 'Writerside-builder image'
+    required: true
+  instance:
+    description: "Instance to build"
+    required: true
+  artifact:
+    description: "Artifacts to store"
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'
