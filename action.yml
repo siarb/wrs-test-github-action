@@ -8,6 +8,7 @@ inputs:
   image-version:
     description: 'Writerside docker image version'
     required: true
+    default: '2.1.1485-p3896'
   instance:
     description: "Instance to build"
     required: true
