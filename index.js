@@ -3,12 +3,17 @@ const exec = require('@actions/exec');
 
 async function run() {
     try {
-        const imageVersion = core.getInput('image-version');
+        let imageVersion = core.getInput('image-version');
         const instance = core.getInput('instance');
         const artifact = core.getInput('artifact');
         const workspace = process.env.GITHUB_WORKSPACE;
 
-        const myCommands = `
+        // Set a default docker image if image-version is undefined
+        if (!imageVersion) {
+            imageVersion = '2.1.1479-p3869';
+        }
+
+        const commands = `
             export DISPLAY=:99
             Xvfb :99 &
             /opt/builder/bin/idea.sh helpbuilderinspect -source-dir /github/workspace -product ${instance} --runner github -output-dir /github/workspace/artifacts/ || true
@@ -25,7 +30,7 @@ async function run() {
             `registry.jetbrains.team/p/writerside/builder/writerside-builder:${imageVersion}`,
             '/bin/bash',
             '-c',
-            myCommands
+            commands
         ]);
     }
     catch (error) {
