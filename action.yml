@@ -7,7 +7,7 @@ branding:
 inputs:
   image-version:
     description: 'Writerside docker image version'
-    required: true
+    required: false
   instance:
     description: "Instance to build"
     required: true
