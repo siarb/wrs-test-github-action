@@ -3,7 +3,7 @@ const exec = require('@actions/exec');
 
 async function run() {
     try {
-        const imageVersion = core.getInput('image-version');
+        let imageVersion = core.getInput('image-version');
         const instance = core.getInput('instance');
         const artifact = core.getInput('artifact');
         const workspace = process.env.GITHUB_WORKSPACE;
@@ -15,6 +15,11 @@ async function run() {
             echo "Test existing artifacts"
             test -e /github/workspace/artifacts/${artifact} && echo ${artifact} exists
         `;
+
+        // Set a default docker image if image-version is undefined
+        if (!imageVersion) {
+            imageVersion = '2.1.1479-p3869';
+        }
 
         // Run your Docker container
         await exec.exec('docker', [
